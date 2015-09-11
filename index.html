@@ -17,14 +17,24 @@
       }
 
       .container-tracker {
-        border-radius: 10px;
-        padding: 10px;
-        background: #000;
+        border-radius: 5px;
+        padding: 5px;
         position: absolute;
+      }
+
+      #settings {
+        position: absolute;
+        display: block;
+        width: 100%;
+        background: #eee;        
+        z-index: 999;
       }
     </style>
   </head>
   <body>
+    <div id="settings">
+      <input type="color" name="color-picker" />
+    </div>
 
     <script type="text/javascript">
 
@@ -87,21 +97,22 @@
 
       function getMousePosition(pos) {
 
-        var containerTrack = document.createElement('div');
+        var containerTrack = document.createElement('div'),
+                color = document.getElementsByName('color-picker');
 
         if (!pos) {
           // We haven't seen any movement yet
         }
         else {
 
-          // console.log(containerTrack);
-//          setStyle(containerTrack, {
-//            'left': pos.x + "px",
-//            'top': pos.y + "px"
-//          });
+          console.log({
+            'left': pos.x + "px",
+            'top': pos.y + "px"
+          });
 
-          containerTrack.style.left = (pos.x - 10) + "px";
-          containerTrack.style.top = (pos.y - 10) + "px";
+          containerTrack.style.left = (pos.x - 5) + "px";
+          containerTrack.style.top = (pos.y - 5) + "px";
+          containerTrack.style.backgroundColor = color[0].value;
           containerTrack.className = "container-tracker";
 
           document.body.appendChild(containerTrack);
