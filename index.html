@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Mouse Tracker</title>
+    <style type="text/css">
+      body {
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      .container-tracker {
+        border-radius: 10px;
+        padding: 10px;
+        background: #000;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+
+      function setStyle(elem, propertyObject) {
+
+        for (var property in propertyObject) {
+          elem.style[property] = propertyObject[property];
+        }
+      }
+
+      document.onclick = drawMovement;
+      document.onmousemove = drawMovement;
+
+      function drawMovement(e) {
+
+        var isLeftBtnPressed,
+                e = e || window.event,
+                button = e.which || e.button;
+
+        isLeftBtnPressed = button === 1;
+
+        // console.log(isLeftBtnPressed);
+
+        if (isLeftBtnPressed) {
+          getMousePosition(e);
+        }
+      }
+
+      //document.onmousemove = handleMouseMove;
+      //setInterval(getMousePosition, 1); // setInterval repeats every X ms
+
+      function handleMouseMove(event) {
+        var dot, eventDoc, doc, body, pageX, pageY;
+
+        event = event || window.event; // IE-ism
+
+        // If pageX/Y aren't available and clientX/Y are,
+        // calculate pageX/Y - logic taken from jQuery.
+        // (This is to support old IE)
+        if (event.pageX === null && event.clientX !== null) {
+
+          eventDoc = (event.target && event.target.ownerDocument) || document;
+          doc = eventDoc.documentElement;
+          body = eventDoc.body;
+
+          event.pageX = event.clientX +
+                  (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+                  (doc && doc.clientLeft || body && body.clientLeft || 0);
+
+          event.pageY = event.clientY +
+                  (doc && doc.scrollTop || body && body.scrollTop || 0) -
+                  (doc && doc.clientTop || body && body.clientTop || 0);
+        }
+
+        return {
+          x: event.pageX,
+          y: event.pageY
+        };
+      }
+
+      function getMousePosition(pos) {
+
+        var containerTrack = document.createElement('div');
+
+        if (!pos) {
+          // We haven't seen any movement yet
+        }
+        else {
+
+          // console.log(containerTrack);
+//          setStyle(containerTrack, {
+//            'left': pos.x + "px",
+//            'top': pos.y + "px"
+//          });
+
+          containerTrack.style.left = (pos.x - 10) + "px";
+          containerTrack.style.top = (pos.y - 10) + "px";
+          containerTrack.className = "container-tracker";
+
+          document.body.appendChild(containerTrack);
+
+        }
+      }
+    </script>
+
+  </body>
+</html>
