@@ -21,12 +21,12 @@
         padding: 5px;
         position: absolute;
       }
-
+      
       #settings {
         position: absolute;
         display: block;
         width: 100%;
-        background: #eee;        
+        background: #eee;
         z-index: 999;
       }
     </style>
@@ -69,11 +69,8 @@
       function handleMouseMove(event) {
         var dot, eventDoc, doc, body, pageX, pageY;
 
-        event = event || window.event; // IE-ism
+        event = event || window.event;
 
-        // If pageX/Y aren't available and clientX/Y are,
-        // calculate pageX/Y - logic taken from jQuery.
-        // (This is to support old IE)
         if (event.pageX === null && event.clientX !== null) {
 
           eventDoc = (event.target && event.target.ownerDocument) || document;
@@ -101,7 +98,7 @@
                 color = document.getElementsByName('color-picker');
 
         if (!pos) {
-          // We haven't seen any movement yet
+          // No mouse movement
         }
         else {
 
@@ -116,7 +113,6 @@
           containerTrack.className = "container-tracker";
 
           document.body.appendChild(containerTrack);
-
         }
       }
     </script>
